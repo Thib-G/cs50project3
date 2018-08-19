@@ -1,4 +1,3 @@
-# cs50project3
-CS50w project 3: Pizza
+# Project 3
 
-https://docs.cs50.net/web/2018/w/projects/3/project3.html
+Web Programming with Python and JavaScript

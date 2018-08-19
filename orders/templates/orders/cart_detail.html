@@ -1,0 +1,22 @@
+{% extends 'orders/base.html' %}
+{% load tz %}
+{% block title %}Cart{% endblock %}
+{% block content %}
+    {% if cart %}
+    <h2>{{ cart }}</h2>
+    <p class="text-muted">Created at {{ cart.created_at|timezone:"Europe/Paris" }}, updated at {{ cart.updated_at|timezone:"Europe/Paris" }}</p>
+    <ul>
+        {% for pricing_item in cart.pricing_items.all %}
+        <li>{{ pricing_item }}</li>
+        {% endfor %}
+    </ul>
+    <div>
+        <form action="{% url 'orders:delete_cart' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Delete cart" class="btn btn-danger">
+        </form>
+    </div>
+    {% else %}
+    <p>Please add at least an item to your cart</p>
+    {% endif %}
+{% endblock %}
