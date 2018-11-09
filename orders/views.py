@@ -4,7 +4,7 @@ from django.views.decorators.http import require_http_methods
 
 from django.views import generic
 
-from .models import Category, Pricing, Cart
+from .models import Category, Pricing, Cart, CartItem
 
 # Create your views here.
 
@@ -35,12 +35,12 @@ def add_to_cart(request):
     if request.session.has_key('cart_id'):
         cart_id = request.session['cart_id']
         cart = Cart.objects.get(pk=cart_id)
-        cart.pricing_items.add(pricing_item)
+        cart.cart_items.add(CartItem(pricing_item=pricing_item))
         cart.save()
     else:
         cart = Cart()
         cart.save()
-        cart.pricing_items.add(pricing_item) # pylint: disable=E1101
+        cart.cart_items.add(CartItem(pricing_item=pricing_item)) # pylint: disable=E1101
         cart.save()
         request.session['cart_id'] = cart.pk
     return HttpResponseRedirect(reverse('orders:cart'))

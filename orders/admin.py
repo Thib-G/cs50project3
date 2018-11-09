@@ -31,7 +31,7 @@ class ItemAdmin(admin.ModelAdmin):
 
 class CartAdmin(admin.ModelAdmin):
     """List items added to cart"""
-    filter_horizontal = ('pricing_items',)
+    # filter_horizontal = ('cart_items',)
 
 
 admin.site.register(Category, CategoryAdmin)

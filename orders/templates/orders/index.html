@@ -8,21 +8,21 @@
             {% for item in category.item_set.all %}
             <li class="list-group-item d-flex justify-content-between">
                 {{ item }}
-                <span class="text-muted">
+                <div>
                 {% for pricing in item.pricing_set.all %}
-                    <div>
-                        {% if pricing.pricing_type != 'N' %}
-                            {{ pricing.get_pricing_type_display }}: 
-                        {% endif %}
-                        ${{ pricing.price }}
-                        <form method="post" action="{% url 'orders:add_to_cart' %}">
+                    <div class="m-2 text-muted">
+                        <form method="post" action="{% url 'orders:add_to_cart' %}" class="form-inline">
                             {% csrf_token %}
                             <input type="hidden" name="pricing_id" value="{{ pricing.pk }}">
-                            <input type="submit" value="Add to cart" class="btn btn-default btn-sm">
+                            {% if pricing.pricing_type != 'N' %}
+                                {{ pricing.get_pricing_type_display }}: 
+                            {% endif %}
+                            ${{ pricing.price }}
+                            <input type="submit" value="Add to cart" class="btn btn-default btn-sm ml-2 pull-right">
                         </form>
                     </div>
                 {% endfor %}
-                </span>
+                </div>
             </li>
             {% empty %}
             <li>No subcategory</li>

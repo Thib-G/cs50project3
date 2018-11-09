@@ -52,7 +52,6 @@ class Topping(models.Model):
 
 class Cart(models.Model):
     """Cart containing pricing items"""
-    pricing_items = models.ManyToManyField(Pricing)
     is_completed = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -60,3 +59,9 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"Cart nr {self.pk}"
+
+
+class CartItem(models.Model):
+    """Item added to the shopping cart"""
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    pricing_item = models.OneToOneField(Pricing, null=True, on_delete=models.CASCADE)
