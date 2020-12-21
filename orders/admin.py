@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Item, Topping, Pricing, Cart
+from .models import Category, Item, Topping, Pricing, Cart, CartItem
 
 # Register your models here.
 
@@ -38,3 +38,5 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Topping)
 admin.site.register(Cart, CartAdmin)
+admin.site.register(CartItem)
+admin.site.register(Pricing)
