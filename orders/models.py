@@ -65,3 +65,6 @@ class CartItem(models.Model):
     """Item added to the shopping cart"""
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     pricing_item = models.OneToOneField(Pricing, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"CartItem cart={self.cart} pricing_item={self.pricing_item}"

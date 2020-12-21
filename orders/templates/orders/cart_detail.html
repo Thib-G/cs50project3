@@ -6,8 +6,8 @@
     <h2>{{ cart }}</h2>
     <p class="text-muted">Created at {{ cart.created_at|timezone:"Europe/Paris" }}, updated at {{ cart.updated_at|timezone:"Europe/Paris" }}</p>
     <ul>
-        {% for pricing_item in cart.pricing_items.all %}
-        <li>{{ pricing_item }}</li>
+        {% for cartitem in cart.cartitem_set.all %}
+        <li>{{ cartitem.pricing_item }}</li>
         {% endfor %}
     </ul>
     <div>

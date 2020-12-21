@@ -35,12 +35,12 @@ def add_to_cart(request):
     if request.session.has_key('cart_id'):
         cart_id = request.session['cart_id']
         cart = Cart.objects.get(pk=cart_id)
-        cart.cart_items.add(CartItem(pricing_item=pricing_item))
+        cart.cartitem_set.add(CartItem(pricing_item=pricing_item), bulk=False)
         cart.save()
     else:
         cart = Cart()
         cart.save()
-        cart.cart_items.add(CartItem(pricing_item=pricing_item)) # pylint: disable=E1101
+        cart.cartitem_set.add(CartItem(pricing_item=pricing_item), bulk=False) # pylint: disable=E1101
         cart.save()
         request.session['cart_id'] = cart.pk
     return HttpResponseRedirect(reverse('orders:cart'))
